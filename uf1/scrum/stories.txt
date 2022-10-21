@@ -1,0 +1,21 @@
+dependent:
+    - vull consultar la disponibilitat d'un producte, per poder informar un client que el demani.
+    - vull poder crear una factura i ingressar els diners
+    - vull que quan es faci una venda es descompti de l'inventari, per tenir l'inventari actualitzat.
+
+encarregat magatzem botiga:
+    - vull poder gestionar l'estat del magatzem i també atendre a clients, per desenvolupar la meva feina.
+    - vull poder mirar si hi ha un producte baix en stock per demanar-lo al magatzem
+
+encarregat botiga:
+    - vull poder donar d'alta o de baixa a qualsevol dependent per gestionar la contractació
+    - vull poder donar d'alta un producte, per poder-lo introduir a la botiga
+    - vull poder fer les tasques de dependent.
+
+responsable de magatzem:
+    - vull poder rebre les peticions de material de botigues i altres magatzems per poder atendre-les
+    - vull poder subministrar les comandes a les botigues de manera immediata perquè no es quedin sense stock
+    - vull subministrar les comandes als magatzems només si això no implica quedar-me amb menys de la meitat del que he definit com a "baix de stock", per no quedar-me sense stock servint a un altre magatzem.
+    - vull revisar l'inventari un cop al dia per demanar els que estan marcats com a baix d'stock, per no quedar-me sense inventari
+    - vull que el sistema demani a altres magatzems crei la comanda comanda automàticament, per no quedar-me sense stock.
+    - vull poder contractar i donar de baixa, per gestionar la contractació

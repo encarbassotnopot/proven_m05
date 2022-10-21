@@ -1,0 +1,59 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{fancyhdr} % Per la capçalera
+\usepackage{geometry}
+\usepackage{graphicx} % Per importar logos (i altres gràfics)
+\usepackage[colorlinks,linkcolor=black]{hyperref} % Per fer que l'index tingui hiperlinks en el pdf
+\usepackage{parskip}
+\usepackage[sc,small]{titlesec} % Seccions personalitzades
+
+%% Títols
+\newcommand{\modulnum}{1}
+\newcommand{\modulnom}{Entorns de Desenvolupament}
+
+\newcommand{\ufnum}{1}
+\newcommand{\ufnom}{Desenvolupament de Programari}
+
+\newcommand{\acttipus}{Pràctica}
+\newcommand{\actnom}{Gestió de Projectes}
+
+%% Entreliniats
+\linespread{1.5}
+
+%% Capçalera
+\pagestyle{fancy}
+\setlength{\headheight}{40pt}
+\addtolength{\topmargin}{-20pt}
+\fancyhead[L]{\includegraphics*[height=\headheight]{provencana_bw.pdf}}
+\fancyhead[R]{
+	{\scshape\scriptsize Mòdul \modulnum: \modulnom}\\
+	{\scshape\footnotesize \acttipus - \actnom}\\
+	{\scshape\small Eina Coma Bages}}
+
+\addtolength{\textheight}{2cm}
+
+%% Comandes personalitzades
+\newcommand{\mygraphic}[2][width=0.9\textwidth]{\begin{center}
+		\centering\includegraphics[#1]{#2}\par
+\end{center}}
+
+\renewcommand{\contentsname}{Índex}
+
+\begin{document}
+\include{portada.tex}
+
+\section{Planificació Gantt del projecte}
+\mygraphic{gantt.pdf}
+En blau les dates en que es treballa en cada tasca, i en vermell les dates de venciment. 
+
+\section{Cost}
+\mygraphic{factura.pdf}
+
+\section{Raonament}
+Amb jornades de 8 hores en dies laborables n'hi ha prou per poder completar totes les tasques abans de les dates límit excepte la instal·lació de sistemes.
+
+El gruix de la tasca la duen a terme els tècnics de sistemes, que només tenim disponibles el dia abans del termini.
+Afortunadament, en tenim dos i han de fer 9 hores de feina cada un, per tant si cada un fa una hora extra podem completar la taca abans no venci.
+
+\end{document}
