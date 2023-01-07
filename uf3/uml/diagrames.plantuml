@@ -1,0 +1,81 @@
+@startuml 1
+skinparam linetype ortho
+Llibre "1" *-d- "1..*" Part
+Part "1" *-l- "1..*" Capítol
+Capítol "1" *-u- "1..*" Secció
+@enduml
+
+@startuml 2
+skinparam linetype ortho
+class Llibre {
+	editor
+	data
+	ISBN
+}
+class Part {
+	títol
+	número
+}
+class Capítol {
+	títol
+	número
+	resum
+}
+class Secció {
+	títol
+	número
+}
+
+Llibre "1" *-d- "1..*" Part
+Part "1" *-l- "1..*" Capítol
+Capítol "1" *-u- "1..*" Secció
+@enduml
+
+@startuml 3
+skinparam linetype ortho
+class Llibre {
+	editor
+	data
+	ISBN
+}
+class Part extends Fragment
+class Capítol extends Fragment {
+	resum
+}
+class Secció extends Fragment 
+abstract Fragment {
+	títol
+	número
+}
+
+Llibre "1" *-d- "1..*" Part
+Part "1" *-l- "1..*" Capítol
+Capítol "1" *-l- "1..*" Secció
+@enduml
+
+@startuml 4
+skinparam linetype ortho
+class Persona
+
+Persona "1" -- "0..*" Persona : ↓ té fills
+Persona "1" -- "1..*" Persona : ↓ té pares
+@enduml
+
+@startuml 5
+
+class Treballador
+class Habilitat
+class Activitat
+class Projecte
+class Experiència {
+	anys
+}
+
+
+Treballador "5..* Treballadors" <-- "1 Encarregat" Treballador : Té a càrrec
+Activitat "1" --> "*" Activitat : Següent
+
+Treballador "0..*" -- "3..*" Habilitat : Té
+(Treballador, Habilitat) .. Experiència
+
+@enduml
