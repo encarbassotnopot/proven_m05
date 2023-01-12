@@ -8,22 +8,22 @@ Capítol "1" *-u- "1..*" Secció
 @startuml 2
 skinparam linetype ortho
 class Llibre {
-	editor
-	data
-	ISBN
+	String editor
+	Date data
+	int ISBN
 }
 class Part {
-	títol
-	número
+	String títol
+	int número
 }
 class Capítol {
-	títol
-	número
-	resum
+	String títol
+	int número
+	String resum
 }
 class Secció {
-	títol
-	número
+	String títol
+	int número
 }
 
 Llibre "1" *-d- "1..*" Part
@@ -32,20 +32,20 @@ Capítol "1" *-u- "1..*" Secció
 @enduml
 
 @startuml 3
-skinparam linetype ortho
+skinparam linetype polyline
 class Llibre {
-	editor
-	data
-	ISBN
+	String editor
+	Date data
+	int ISBN
 }
 class Part extends Fragment
 class Capítol extends Fragment {
-	resum
+	String resum
 }
 class Secció extends Fragment 
 abstract Fragment {
-	títol
-	número
+	String títol
+	int número
 }
 
 Llibre "1" *-d- "1..*" Part
@@ -57,25 +57,106 @@ Capítol "1" *-l- "1..*" Secció
 skinparam linetype ortho
 class Persona
 
-Persona "1" -- "0..*" Persona : ↓ té fills
-Persona "1" -- "1..*" Persona : ↓ té pares
+Persona "1..* pare" -- "1..* fill" Persona : té 
 @enduml
 
 @startuml 5
 
+class Feina
 class Treballador
 class Habilitat
-class Activitat
-class Projecte
+class Activitat extends Feina
+class Projecte extends Feina
 class Experiència {
-	anys
+	int anys
 }
 
 
-Treballador "5..* Treballadors" <-- "1 Encarregat" Treballador : Té a càrrec
-Activitat "1" --> "*" Activitat : Següent
+Treballador "5..* Treballadors" <-- "0..1 Encarregat" Treballador : Té a càrrec
+Activitat "0..1 Prèvia" --> "0..* Següent" Activitat
 
 Treballador "0..*" -- "3..*" Habilitat : Té
 (Treballador, Habilitat) .. Experiència
+
+Habilitat -- Activitat
+
+Projecte "1" *-- "1..*" Activitat
+
+@enduml
+
+@startuml 6
+
+class Treballador
+class Projecte
+class Activitat
+class Pla
+class Calendari
+class ActivitatProgramada extends Activitat {
+	Date dataInici
+	Date dataFinal
+}
+class Fita extends ActivitatProgramada
+class Producte
+
+<> diamond
+
+Pla . diamond
+Projecte "1" -- diamond 
+Activitat "1..*" -- diamond 
+Treballador "1..*" -- diamond 
+
+Pla "0..*" -- "1" Treballador : Posseeix
+
+Pla -> "1" Calendari : Té
+
+ActivitatProgramada "0..*" -- "1" Calendari : Té
+
+Fita "0..*" -- "0..*" Producte 
+(Fita, Producte) .. Estatus : Té
+@enduml
+
+@startuml 7
+class Llibre {
+	int ISBN
+	String títol
+	String editorial
+	String autor
+}
+class Soci {
+	int id
+	String nom
+	String cognoms
+	String correu
+}
+class Exemplar {
+	int id
+	EstatCataleg estatCataleg
+	EstatPrestec estatPrestec
+}
+enum EstatCataleg {
+	ALTA
+	BAIXA
+}
+enum EstatPrestec {
+	DISPONIBLE
+	NO_DISPONIBLE
+}
+class Préstec {
+	Date dataPréstec
+	Date dataRetorn
+	int renovacions
+}
+class DataPréstec {
+
+}
+
+Exemplar "1..*" -- "1" Llibre : Existeix
+
+<> diamond 
+
+Exemplar "1" -- diamond 
+Soci "1" -- diamond
+DataPréstec "1..*" -- diamond
+Préstec .u. diamond : Té en préstec
 
 @enduml
