@@ -160,3 +160,83 @@ DataPréstec "1..*" -- diamond
 Préstec .u. diamond : Té en préstec
 
 @enduml
+
+@startuml 8
+
+interface Animal {
+	+ void moure()
+	+ void alimentar()
+	+ void expressar()
+}
+
+class Zoo {
+	+ void afegeix(Animal)
+	+ void suprimeix(Animal)
+	+ void suprimeixTots(Animal)
+	+ void mira()
+	+ void surt()
+}
+
+class Espectador {
+	+ void observa(Animal)
+}
+
+class Vaca extends Animal 
+class Cocodril extends Animal 
+
+Zoo "1" -- "0..*" Animal : Conté
+Zoo "1" -- "0..*" Espectador : Visita
+
+@enduml
+
+@startuml 9
+abstract Habitació {
+	int número
+}
+
+abstract Client {
+	String Nom
+	String DNI
+	String email
+}
+
+class HabitacióSimple extends Habitació {
+	int preu
+}
+class HabitacióDoble extends Habitació {
+	int preu
+}
+class HabitacióMatrimonial extends Habitació {
+	int preu
+}
+
+class ClientEsporadic extends Client
+class ClientHabitual extends Client {
+	int valorDescompte;
+}
+
+class Reserva {
+	int inici
+	int final
+}
+
+(Habitació, Client) .. Reserva
+
+class Usuari {
+	String nomUsuari
+	String contrasenya
+	int[] llistaHabDisponibles(Habitació)
+	float consultaPreuHab(Habitació)
+	float consultaDescompte()
+	float consultaPreu(DNI, Habitació, nits)
+	Imatge mostraFotoHab(Habitació)
+	void creaReserva(DNI, Habitació, nits)
+	void creaReserva(Habitació)
+}
+class Administrador extends Usuari {
+	void modificaPreuHab(Habitació, preu)
+	void modificaDescompte(descompte)
+	void calcularGuanys(mes)
+}
+
+@enduml
