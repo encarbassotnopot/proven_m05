@@ -1,0 +1,58 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage[catalan]{babel} % Patrons de trencament de paraula
+\usepackage{fancyhdr} % Per la capçalera
+\usepackage{geometry}
+\usepackage{graphicx} % Per importar logos (i altres gràfics)
+\usepackage[colorlinks,linkcolor=black]{hyperref} % Per fer que l'index tingui hiperlinks en el pdf
+\usepackage{indentfirst}
+\usepackage[sc,small]{titlesec} % Seccions personalitzades
+\usepackage{tikz} % diagrames
+
+%% Títols
+\newcommand{\modulnum}{5}
+\newcommand{\modulnom}{Entorns de Desenvolupament}
+
+\newcommand{\ufnum}{3}
+\newcommand{\ufnom}{Introducció al disseny orientat a objectes}
+
+\newcommand{\acttipus}{Pràctica 1}
+\newcommand{\actnom}{L'aeroport}
+
+\newcommand*{\autor}{Eina Coma Bages}
+
+%% Entreliniats
+\linespread{1.5}
+
+%% Capçalera
+\pagestyle{fancy}
+\setlength{\headheight}{40pt}
+\addtolength{\topmargin}{-20pt}
+\fancyhead[L]{\includegraphics*[height=35pt]{provencana_bw.pdf}}
+\fancyhead[R]{
+	{\scshape\scriptsize Mòdul \modulnum: \modulnom}\\
+	{\scshape\footnotesize \acttipus \space  - \actnom}\\
+	{\scshape\small\autor}}
+
+\addtolength{\textheight}{2cm}
+
+%% Comandes personalitzades
+%%% \maxwidth
+\makeatletter
+\def\maxwidth#1{\ifdim\Gin@nat@width>#1 #1\else\Gin@nat@width\fi}
+\makeatother
+
+%%% \mygraphic
+\newcommand{\mygraphic}[2][width=\maxwidth{\textwidth}]{\begin{center}
+		\centering\includegraphics[#1]{#2}\par
+\end{center}}
+
+\renewcommand{\contentsname}{Índex}
+
+\begin{document}
+\include{portada.tex}
+\section{Tasca 1 - Diagrama de classes}
+\mygraphic{out/1.eps}
+
+\end{document}

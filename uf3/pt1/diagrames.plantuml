@@ -1,0 +1,112 @@
+@startuml 1
+Class Usuari {
+	+ consultaVolsDia()
+	+ registrarUsuari(nom, cognom, mail, nomusuari, contrasenya)
+	+ iniciarSessio(nomusuari, contrasenya)
+}
+Class UsuariRegistrat extends Usuari {
+	- String nom
+	- String cognom
+	- String mail
+	- String nomUsuari
+	- String contrasenya
+	+ consultarVol(num_vol)
+	+ crearAlerta(tipusAlerta, num_vol, telefon)
+	+ eliminarAlerta(num_vol, telefon)
+}
+
+abstract Vol {
+	- String companyia
+	- String num_vol
+	+ veureDetallsLlista()
+	+ veureDetallsComplets()
+}
+Class VolSortida extends Vol {
+	- EstatVolSortida estat
+	- String ciutatDestí
+	- Time horaSortida
+	- String aeroportDestí
+	- String porta
+}
+Class VolArribada extends Vol {
+	- EstatVolArribada estat
+	- String ciutatOrigen
+	- Time horaArribada
+	- String aeroportOrigen
+	- String terminal
+}
+
+abstract LlistaVols {
+	- Vol[] vols 
+}
+class LlistaVolsSortida extends LlistaVols
+class LlistaVolsArribada extends LlistaVols
+
+Usuari --> LlistaVols : "Consulta"
+UsuariRegistrat --> Vol : "Consulta"
+
+VolSortida "0..*" --* "1" LlistaVolsSortida
+VolArribada "0..*" --* "1" LlistaVolsArribada
+
+class Alerta {
+	- TipusAlerta tipus
+	- String num_vol
+	- int telefon
+}
+
+UsuariRegistrat "1" -- "0..*" Alerta
+
+enum TipusAlerta {
+	CANVI_PORTA
+	CANVI_HORA_10MIN
+	CANVI_HORA_QUALSEVOL
+}
+
+abstract Linia {
+	- String nom
+	- Vol[] vols
+}
+class liníaRegular extends Linia {
+	- Freqüència freq
+}
+class liníaCharter extends Linia
+
+class Freqüència << DataType >> {
+	int dia
+	Time hora
+}
+
+Linia "1" *-- "1..*" Vol
+
+class Aeroport
+Linia "0..*" --* "1" Aeroport
+
+enum EstatVol {
+	PREVIST
+	OPERAT
+	CANCEL·LAT
+	RETARDAT
+}
+
+enum EstatVolSortida extends EstatVol
+
+enum EstatVolArribada extends EstatVol {
+	EMBARCANT
+	ÚLTIMA_CRIDA
+}
+
+class Operador {
+	+ crearLínia(nom)
+	+ modificarLíniaReg(nom, freq)
+	+ afegirVol(nomLinia, companyia, num_vol, horaSortida, ciutatDestí, aerportDestí, porta)
+	+ afegirVol(nomLinia, companyia, num_vol, horaArribada, ciutatOrigen, aeroportOrigen, terminal)
+	+ suprimirLínia(nom)
+	+ modificaEstatVol(num, estatVol)
+}
+
+Linia "0..*" <-u- "1" Operador : "Gestiona"
+
+
+TipusAlerta -d[hidden]- Freqüència
+EstatVol -u[hidden]- Freqüència
+@enduml
