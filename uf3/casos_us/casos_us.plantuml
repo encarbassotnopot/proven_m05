@@ -1,0 +1,26 @@
+@startuml 3
+left to right direction
+
+actor "Alumne" as alum
+actor "Professor" as prof
+
+rectangle "Gestió de canvis de grup" {
+	usecase "Donar d'alta mòdul" as uc1
+	usecase "Consultar peticions canvi" as uc2
+	usecase "Sol·licitar canvi" as uc3
+	usecase "Anunciar canvi" as uc4
+	usecase "Verificar mòdul matriculat" as uc5
+}
+
+prof --> uc1
+alum --> uc2
+alum --> uc3
+alum --> uc4
+uc2 ..> uc5 : include
+uc3 ..> uc5 : include
+uc4 ..> uc5 : include
+
+
+
+
+@enduml
